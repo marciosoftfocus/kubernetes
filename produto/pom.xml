@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gasparbarancelli</groupId>
-	<artifactId>discovery</artifactId>
+	<artifactId>produto</artifactId>
 	<version>1.0.0</version>
-	<name>discovery</name>
+	<name>produto</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -21,14 +21,34 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -70,14 +90,14 @@
 						<image>openjdk:15-jdk-slim-buster</image>
 					</from>
 					<to>
-						<image>gasparbarancelli/microservices-discovery:${version}</image>
+						<image>gasparbarancelli/microservices-produto:${version}</image>
 					</to>
 					<container>
 						<jvmFlags>
 							<jvmFlag>-Xms128m</jvmFlag>
 							<jvmFlag>-Xmx256m</jvmFlag>
 						</jvmFlags>
-						<mainClass>com.gasparbarancelli.discovery.DiscoveryApplication</mainClass>
+						<mainClass>com.gasparbarancelli.produto.ProdutoApplication</mainClass>
 					</container>
 				</configuration>
 			</plugin>
