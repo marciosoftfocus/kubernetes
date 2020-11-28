@@ -1,8 +1,11 @@
 package com.gasparbarancelli.produto.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gasparbarancelli.produto.model.Produto;
 import com.gasparbarancelli.produto.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,12 @@ public class ProdutoApi {
     @Autowired
     private ProdutoRepository repository;
 
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @GetMapping
     public List<Produto> all() {
         return repository.findAll();
@@ -26,8 +35,14 @@ public class ProdutoApi {
     }
 
     @PostMapping
-    public Produto insert(@RequestBody Produto produto) {
-        return repository.save(produto);
+    public Produto insert(@RequestBody Produto produto) throws JsonProcessingException {
+        repository.save(produto);
+
+        var produtoJson = objectMapper.writeValueAsString(produto);
+
+        jmsTemplate.convertAndSend("queue.produto.insert", produtoJson);
+
+        return produto;
     }
 
     @DeleteMapping("{id}")
