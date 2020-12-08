@@ -10,6 +10,8 @@ spec:
         app: sistema-noticias
       name: sistema-noticias
     spec:
+      imagePullSecrets:
+        - name: aws-ecr
       containers:
         - name: sistema-noticias-container
           image: aluracursos/sistema-noticias:1
